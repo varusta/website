@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>varusta.com - Sabırla bekleyiniz.</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: black;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 2;
+            margin-bottom: 10vh; /* Yazılar biraz üstte */
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #BC4A3C;
+            margin: 0;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.9);
+        }
+
+        p {
+            font-size: 2rem;
+            color: white;
+            margin: 20px 0 0;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1rem;
+            z-index: 3;
+        }
+
+        /* Tuğla Duvar Container */
+        .brick-wall {
+            position: absolute;
+            bottom: 80px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 80px);
+            display: flex;
+            flex-direction: column-reverse; /* Alttan başla */
+            justify-content: flex-start;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* Satırlar */
+        .row {
+            display: flex;
+            width: 100%;
+            margin-top: -20px; /* İç içe geçme */
+        }
+
+        /* Tek tuğla */
+        .brick {
+            height: 60px;
+            background-color: #BC4A3C;
+            border: 4px solid black;
+            box-sizing: border-box;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            opacity: 0;
+            transform: translateY(40px) scale(0.85);
+            animation: placeBrick 2s ease-out forwards;
+        }
+
+        /* Normal satırlar */
+        .row.normal .brick {
+            flex: 1 1 16.666%;
+        }
+
+        /* Offset satırlar: yarım + 5 tam + yarım */
+        .row.offset .half-brick {
+            flex: 1 1 8.333%;
+        }
+
+        .row.offset .full-brick {
+            flex: 1 1 16.666%;
+        }
+
+        @keyframes placeBrick {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Tuğla gecikmeleri (satır içi) */
+        .brick:nth-child(1), .half-brick:first-child { animation-delay: calc(var(--row-delay) + 0s); }
+        .brick:nth-child(2), .full-brick:nth-child(1) { animation-delay: calc(var(--row-delay) + 0.8s); }
+        .brick:nth-child(3), .full-brick:nth-child(2) { animation-delay: calc(var(--row-delay) + 1.6s); }
+        .brick:nth-child(4), .full-brick:nth-child(3) { animation-delay: calc(var(--row-delay) + 2.4s); }
+        .brick:nth-child(5), .full-brick:nth-child(4) { animation-delay: calc(var(--row-delay) + 3.2s); }
+        .brick:nth-child(6), .full-brick:nth-child(5) { animation-delay: calc(var(--row-delay) + 4.0s); }
+        .half-brick:last-child { animation-delay: calc(var(--row-delay) + 4.8s); }
+
+        /* Satır gecikmeleri (alttan üste, bir kere) */
+        .row:nth-child(1) { --row-delay: 2s; }
+        .row:nth-child(2) { --row-delay: 12s; }
+        .row:nth-child(3) { --row-delay: 22s; }
+        .row:nth-child(4) { --row-delay: 32s; }
+        .row:nth-child(5) { --row-delay: 42s; }
+        .row:nth-child(6) { --row-delay: 52s; }
+        .row:nth-child(7) { --row-delay: 62s; }
+        .row:nth-child(8) { --row-delay: 72s; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            p { font-size: 1.3rem; }
+            .brick, .half-brick { height: 40px; }
+            .row { margin-top: -12px; }
+            .container { margin-bottom: 8vh; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            p { font-size: 1.1rem; }
+            .brick, .half-brick { height: 30px; }
+            .container { margin-bottom: 6vh; }
+        }
+    </style>
+</head>
+<body>
+    <div class="brick-wall">
+        <div class="row normal">
+            <div class="brick"></div><div class="brick"></div><div class="brick"></div><div class="brick"></div><div class="brick"></div><div class="brick"></div>
+        </div>
+        <div class="row offset">
+            <div class="half-brick brick"></div>
+            <div class="full-brick brick"></div><div class="full-brick brick"></div><div class="full-brick brick"></div><div class="full-brick brick"></div><div class="full-brick brick"></div>
+            <div class="half-brick brick"></div>
+        </div>
+        <div class="row normal">
+            <div class="brick"></div><div class="brick"></div><div class="brick"></div><div class="brick"></div><div class="brick"></div><div class="brick"></div>
+        </div>
+        <div class="row offset">
+            <div class="half-brick brick"></div>
+            <div class="full-brick brick"></div><div class="full-brick brick"></div><div class="full-brick brick"></div><div class="full-brick brick"></div><div class="full-brick brick"></div>
+            <div class="half-brick brick"></div>
+        </div>
+        <div class="row normal">
+            <div class="brick"></div><div class="brick"></div><div class="brick"></div><div class="brick"></div><div class="brick"></div><div class="brick"></div>
+        </div>
+        <div class="row offset">
+            <div class="half-brick brick"></div>
+            <div class="full-brick brick"></div><div class="full-brick brick"></div><div class="full-brick brick"></div><div class="full-brick brick"></div><div class="full-brick brick"></div>
+            <div class="half-brick brick"></div>
+        </div>
+        <div class="row normal">
+            <div class="brick"></div><div class="brick"></div><div class="brick"></div><div class="brick"></div><div class="brick"></div><div class="brick"></div>
+        </div>
+        <div class="row offset">
+            <div class="half-brick brick"></div>
+            <div class="full-brick brick"></div><div class="full-brick brick"></div><div class="full-brick brick"></div><div class="full-brick brick"></div><div class="full-brick brick"></div>
+            <div class="half-brick brick"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>varusta.com geliyor!</h1>
+        <p>Sıkı durun, servis ve parça aramayı kökünden değiştirecek çözüm yolda.</p>
+    </div>
+
+    <footer>© 2025 varusta.com - brick by brick.</footer>
+</body>
+</html>
